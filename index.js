@@ -96,7 +96,7 @@ app.get('/movies/year/:title', (req, res) => {
   res.send('GET request successful - movie year by title')
 });
 
-app.get('/movies/genre/:title', (req, res) => {
+app.get('/movies/:title/genre/', (req, res) => {
   res.send('GET request successful - movie genre by title')
 });
 
