@@ -1,17 +1,102 @@
 <!DOCTYPE html>
 
-<title>Movie API</title>
-<body>
-<h1>Movie API</h1>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Documentation</title>
+  </head>
 
-<p>Return a list of ALL movies to the user
-     Return data (description, genre, director, image URL, whether it’s featured or not) about
-    a single movie by title to the user <br>
-     Return data about a genre (description) by name/title (e.g., “Thriller”)<br>
-     Return data about a director (bio, birth year, death year) by name<br>
-     Allow new users to register<br>
-     Allow users to update their user info (username, password, email, date of birth)<br>
-     Allow users to add a movie to their list of favorites<br>
-     Allow users to remove a movie from their list of favorites<br>
-     Allow existing users to deregister</p>
-     </body>
+  <body>
+
+    <h1>Documentation</h1>
+
+    <h2>Horror Movies</h2>
+    <p>This API is a collection of my favorite movies.</p>
+    <p>You can make an account to store lists of your favorite movies</p>
+
+    <div>
+      <table>
+        <tr>
+          <th>Business Logic</th>
+          <th>URL Endoint</th>
+          <th>HTTP Method</th>
+          <th>Request body data format</th>
+          <th>Response body data format</th>
+        </tr>
+        <tr>
+          <td>Get a list of all movies</td>
+          <td>/movies</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>JSON object with data about all movies</td>
+        </tr>
+        <tr>
+          <td>Get information about a movie title</td>
+          <td>/movies/:Title</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>JSON object with data about a specific movie with info about title, director, and year</td>
+        </tr>
+        <tr>
+          <td>Return data about the year of movie by title</td>
+          <td>/movies/year/:title</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>JSON object with data about year of a title</td>
+        </tr>
+        <tr>
+          <td>Return data about director of movie by name</td>
+          <td>/movies/Director/:name</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>JSON object with data about director</td>
+        </tr>
+        <tr>
+          <td>Return data about genre of movie by title</td>
+          <td>/movies/genre/:title</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>JSON object with data about genre of a title</td>
+        </tr>
+        <tr>
+          <td>Allow new users to register</td>
+          <td>/users</td>
+          <td>POST</td>
+          <td>JSON object with data of a new user containing username, password, email, date of birth</td>
+          <td>JSON object with data about user that was addded including id</td>
+        </tr>
+        <tr>
+          <td>allow users to update their info</td>
+          <td>/users/:Username</td>
+          <td>PUT</td>
+          <td>JSON object with updated information</td>
+          <td>JSON object with updated data</td>
+        </tr>
+        <tr>
+          <td>Allow users to add favorite movies</td>
+          <td>/users/:Username/movies/:Title</td>
+          <td>POST</td>
+          <td>None</td>
+          <td>JSON object with data about movies to be added</td>
+        </tr>
+        <tr>
+          <td>allow users to remove movies from favorites</td>
+          <td>/users/:Username/movies/:Title</td>
+          <td>DELETE</td>
+          <td>None</td>
+          <td>a message stating if movie was removed successfully</td>
+        </tr>
+        <tr>
+          <td>Allow users to deregister their account</td>
+          <td>/users/:Username</td>
+          <td>DELETE</td>
+          <td>None</td>
+          <td>a message stating if account was removed successfully</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+</html>
