@@ -92,7 +92,7 @@ app.get('/movies/:title', (req, res) => {
   }));
 });
 
-app.get('/movies/year/:title', (req, res) => {
+app.get('/movies/:title/year', (req, res) => {
   res.send('GET request successful - movie year by title')
 });
 
@@ -100,7 +100,7 @@ app.get('/movies/:title/genre/', (req, res) => {
   res.send('GET request successful - movie genre by title')
 });
 
-app.get('/movies/directors/:name', (req, res) => {
+app.get('/movies/:name/directors/', (req, res) => {
   res.send('GET request sucessful - movie director');
 });
 
