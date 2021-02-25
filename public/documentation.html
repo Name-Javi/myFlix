@@ -1,102 +1,246 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOCUMENTATION</title>
+    <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /> -->
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:400,700" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" href="css/style.production.css">-->
+</head>
+<body>
+    <h1>About the Movie API</h1>
+    <h2>Objective</h2>
+        <p>To build the server­side component of a “movies” web application. The web application will provide users with access to information about different movies, directors, and genres. Users will be able to sign up, update their personal information, and create a list of their favorite movies. </p>
+    <h2>API Structure Reference</h2>
+    <table>
+        <tr>
+            <th>Description</th>
+            <th>Request Method</th>
+            <th>URL Endpoint</th>
+            <th>Query Parameters</th>
+            <th>Request Body Format</th>
+            <th>Response Body Format</th>
+        </tr>
+        <tr style="color:blue;">
+            <td>Return list of all movies</td>
+            <td>GET</td>
+            <td>/movies</td>
+            <td>None</td>
+            <td>None</td>
+            <td>A JSON object with a list of movies. Structure example:
+                <br>{
+                    "Genre": {
+                        "Name": "Horror",
+                    },
+                    "Director": {
+                        "Name": "Lars Von Trier",
+                        "Bio": "Lars von Trier is a Danish film director and screenwriter with a prolific and controversial career spanning almost four decades.",
+                    },
+                    "Actors": [],
+                    "_id": "60220bf8e11574a9a3baf465",
+                    "Title": "The House That Jack Built",
+                    "Description": "In five episodes, failed architect and vicious sociopath Jack recounts his elaborately orchestrated murders -- each, as he views them, a towering work of art that ...",
+                }
+            </td>
+        </tr>
+        <tr style="color:red;">
+            <td>Return data about a single movie by title</td>
+            <td>GET</td>
+            <td>/movies/:Title</td>
+            <td>Movie Title</td>
+            <td>None</td>
+            <td>A JSON object with data about a specific movie. Structure example:
+                <br>{
+                  {
+                    "Genre": {
+                        "Name": "Horror",
+                    },
+                    "Director": {
+                        "Name": "Lars Von Trier",
+                        "Bio": "Lars von Trier is a Danish film director and screenwriter with a prolific and controversial career spanning almost four decades.",
+                    },
+                    "Actors": [],
+                    "_id": "60220bf8e11574a9a3baf465",
+                    "Title": "The House That Jack Built",
+                    "Description": "In five episodes, failed architect and vicious sociopath Jack recounts his elaborately orchestrated murders -- each, as he views them, a towering work of art that ...",
+                }
+                }
+            </td>
+        </tr>
+        <tr style="color:blue;">
+            <td>Return data about a genre by name/title</td>
+            <td>GET</td>
+            <td>/movies/genres/:Title</td>
+            <td>Movie Title</td>
+            <td>None</td>
+            <td>A JSON object with data about the genre of a movie. Structure example:
+                <br>{
+                <br>"Name": "Horror",
+                <br>}
+            </td>
+        </tr>
+        <tr style="color:red;">
+            <td>Return data about a director by name</td>
+            <td>GET</td>
+            <td>/movies/directors/:Name</td>
+            <td>Director's Name</td>
+            <td>None</td>
+            <td>A JSON object with data about a director. Structure example:
+                <br>{
+                <br>"Name": "Lars Von Trier",
+                <br>"Bio": "Lars von Trier is a Danish film director and screenwriter with a prolific and controversial career spanning almost four decades.",
+                <br>}
+            </td>
+        </tr>
+        <tr style="color:blue;">
+            <td>Return list of all users</td>
+            <td>GET</td>
+            <td>/users</td>
+            <td>None</td>
+            <td>None</td>
+            <td>A JSON object with data about all registered users. Structure example:
+                <br>{
+                <br>"FavoriteMovies": [
+                <br>    "60221214e11574a9a3baf467",
+                <br>    "60234245e11574a9a3baf469"
+                <br>],
+                <br>"_id": "60235e0ce11574a9a3baf46f",
+                <br>"FirstName": "Javi",
+                <br>"LastName": "Solis",
+                <br>"Username": "JaviSolis",
+                <br>"Password": "movies4me",
+                <br>"Email": "Javisolis@gmail.com",
+                <br>"Birth": "1994-28-10T00:00:00.000Z"
+                <br>}
+            </td>
+        </tr>
+        <tr style="color:red;">
+            <td>Allow new users to register</td>
+            <td>POST</td>
+            <td>/users</td>
+            <td>None</td>
+            <td>A JSON object with data about the user registering/being added. Structure example:
+                <br>{
+                  <br>"FirstName": "Javi",
+                  <br>"LastName": "Solis",
+                  <br>"Username": "JaviSolis",
+                  <br>"Password": "movies4me",
+                  <br>"Email": "Javisolis@gmail.com",
+                  <br>"Birth": "1994-28-10T00:00:00.000Z"
+                <br>}
+            </td>
+            <td>A JSON object with data about the user that was registered/added. Structure example:
+                <br>{
+                  <br>"_id": "60235e0ce11574a9a3baf46f",
+                  <br>"FirstName": "Javi",
+                  <br>"LastName": "Solis",
+                  <br>"Username": "JaviSolis",
+                  <br>"Password": "movies4me",
+                  <br>"Email": "Javisolis@gmail.com",
+                  <br>"Birth": "1994-28-10T00:00:00.000Z"
+                <br>}
+            </td>
+        </tr>
+        <tr style="color:blue;">
+            <td>Return information for a single user based on username</td>
+            <td>GET</td>
+            <td>/users/:Username</td>
+            <td>Username</td>
+            <td>None</td>
+            <td>A JSON object with data about the user. Structure example:
+                <br>{
+                    <br>"FavoriteMovies": [
+                    <br>    "60221214e11574a9a3baf467",
+                    <br>    "60234245e11574a9a3baf469"
+                    <br>],
+                    <br>"_id": "60235e0ce11574a9a3baf46f",
+                    <br>"FirstName": "Javi",
+                    <br>"LastName": "Solis",
+                    <br>"Username": "JaviSolis",
+                    <br>"Password": "movies4me",
+                    <br>"Email": "Javisolis@gmail.com",
+                    <br>"Birth": "1994-28-10T00:00:00.000Z"
+                    <br>}
+            </td>
+        </tr>
+        <tr style="color:red;">
+            <td>Allow users to update their user info based on username</td>
+            <td>PUT</td>
+            <td>/users/:Username</td>
+            <td>Username</td>
+            <td>None</td>
+            <td>A text message confirming successful update of user information and JSON object showing the updated information. Structure example:
+                <br>{
+                    <br>"FavoriteMovies": [
+                    <br>    "60221214e11574a9a3baf467",
+                    <br>    "60234245e11574a9a3baf469"
+                    <br>],
+                    <br>"_id": "60235e0ce11574a9a3baf46f",
+                    <br>"FirstName": "Javi",
+                    <br>"LastName": "Solis",
+                    <br>"Username": "JaviSolis",
+                    <br>"Password": "movies4me",
+                    <br>"Email": "Javisolis@gmail.com",
+                    <br>"Birth": "1994-28-10T00:00:00.000Z"
+                    <br>}
+            </td>
+        </tr>
+        <tr style="color:blue;">
+            <td>Allow users to add a movie to their list of favorites</td>
+            <td>POST</td>
+            <td>/users/:Username/Movies/:MovieID</td>
+            <td>Username, Movie Title</td>
+            <td>None</td>
+            <td>A text message confirming the selected movie was added to favorites and JSON object showing the updated information. Structure example:
+                <br>{
+                    <br>"FavoriteMovies": [
+                    <br>    "60221214e11574a9a3baf467",
+                    <br>    "60234245e11574a9a3baf469"
+                    <br>],
+                    <br>"_id": "60235e0ce11574a9a3baf46f",
+                    <br>"FirstName": "Javi",
+                    <br>"LastName": "Solis",
+                    <br>"Username": "JaviSolis",
+                    <br>"Password": "movies4me",
+                    <br>"Email": "Javisolis@gmail.com",
+                    <br>"Birth": "1994-28-10T00:00:00.000Z"
+                    <br>}
+            </td>
+        </tr>
+        <tr style="color:red;">
+            <td>Allow users to remove a movie to their list of favorites</td>
+            <td>DELETE</td>
+            <td>/users/:Username/Movies/:MovieID</td>
+            <td>Username, Movie Title</td>
+            <td>None</td>
+            <td>A text message confirming the selected movie was removed from favorites and JSON object showing the updated information. Structure example:
+                <br>{
+                    <br>"FavoriteMovies": [
+                    <br>    "60221214e11574a9a3baf467"
+                    <br>],
+                    <br>"_id": "60235e0ce11574a9a3baf46f",
+                    <br>"FirstName": "Javi",
+                    <br>"LastName": "Solis",
+                    <br>"Username": "JaviSolis",
+                    <br>"Password": "movies4me",
+                    <br>"Email": "Javisolis@gmail.com",
+                    <br>"Birth": "1994-28-10T00:00:00.000Z"
+                    <br>}
+            </td>
+        </tr>
+        <tr style="color:blue;">
+            <td>Allow existing users to deregister</td>
+            <td>DELETE</td>
+            <td>/users/:Username</td>
+            <td>Username</td>
+            <td>None</td>
+            <td>A text message confirming successful removal of user.</td>
+        </tr>
+    </table>
 
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>Documentation</title>
-  </head>
 
-  <body>
-
-    <h1>Documentation</h1>
-
-    <h2>Horror Movies</h2>
-    <p>This API is a collection of my favorite movies.</p>
-    <p>You can make an account to store lists of your favorite movies</p>
-
-    <div>
-      <table>
-        <tr>
-          <th>Business Logic</th>
-          <th>URL Endoint</th>
-          <th>HTTP Method</th>
-          <th>Request body data format</th>
-          <th>Response body data format</th>
-        </tr>
-        <tr>
-          <td>Get a list of all movies</td>
-          <td>/movies</td>
-          <td>GET</td>
-          <td>None</td>
-          <td>JSON object with data about all movies</td>
-        </tr>
-        <tr>
-          <td>Get information about a movie title</td>
-          <td>/movies/:Title</td>
-          <td>GET</td>
-          <td>None</td>
-          <td>JSON object with data about a specific movie with info about title, director, and year</td>
-        </tr>
-        <tr>
-          <td>Return data about the year of movie by title</td>
-          <td>/movies/year/:title</td>
-          <td>GET</td>
-          <td>None</td>
-          <td>JSON object with data about year of a title</td>
-        </tr>
-        <tr>
-          <td>Return data about director of movie by name</td>
-          <td>/movies/Director/:name</td>
-          <td>GET</td>
-          <td>None</td>
-          <td>JSON object with data about director</td>
-        </tr>
-        <tr>
-          <td>Return data about genre of movie by title</td>
-          <td>/movies/genre/:title</td>
-          <td>GET</td>
-          <td>None</td>
-          <td>JSON object with data about genre of a title</td>
-        </tr>
-        <tr>
-          <td>Allow new users to register</td>
-          <td>/users</td>
-          <td>POST</td>
-          <td>JSON object with data of a new user containing username, password, email, date of birth</td>
-          <td>JSON object with data about user that was addded including id</td>
-        </tr>
-        <tr>
-          <td>allow users to update their info</td>
-          <td>/users/:Username</td>
-          <td>PUT</td>
-          <td>JSON object with updated information</td>
-          <td>JSON object with updated data</td>
-        </tr>
-        <tr>
-          <td>Allow users to add favorite movies</td>
-          <td>/users/:Username/movies/:Title</td>
-          <td>POST</td>
-          <td>None</td>
-          <td>JSON object with data about movies to be added</td>
-        </tr>
-        <tr>
-          <td>allow users to remove movies from favorites</td>
-          <td>/users/:Username/movies/:Title</td>
-          <td>DELETE</td>
-          <td>None</td>
-          <td>a message stating if movie was removed successfully</td>
-        </tr>
-        <tr>
-          <td>Allow users to deregister their account</td>
-          <td>/users/:Username</td>
-          <td>DELETE</td>
-          <td>None</td>
-          <td>a message stating if account was removed successfully</td>
-        </tr>
-      </table>
-    </div>
-  </body>
+</body>
 
 </html>
