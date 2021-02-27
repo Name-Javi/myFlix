@@ -8,7 +8,7 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect('mongodb://localhost:27017/myFlixDB', {
+mongoose.connect('mongodb+srv://Javi:Jessilove19@cluster0.wbhpv.mongodb.net/myFlixDB?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -43,12 +43,12 @@ app.get('/movies', (req, res) => {
   });
 });
 //get info about a single movie by title
-app.get('/movies/:title', (req, res) => {
+app.get('/movies/:Title', (req, res) => {
   Movies.findOne({
       Title: req.params.Title
     })
-    .then((movie) => {
-      res.status(201).json(movie);
+    .then((movies) => {
+      res.status(201).json(movies);
     })
     .catch((err) => {
       console.error(err);
@@ -56,10 +56,10 @@ app.get('/movies/:title', (req, res) => {
     });
 });
 //get data about a genre by title
-app.get('/movies/:title/genre/', (req, res) =>  {
+app.get('/movies/:Title/Genre/', (req, res) =>  {
   Movies.findOne({ Title: req.params.Title })
-  .then((movie) => {
-      res.status(201).json(movie.Genre);
+  .then((movies) => {
+      res.status(201).json(movies.Genre);
   })
   .catch((err) => {
       console.error(err);
@@ -67,7 +67,7 @@ app.get('/movies/:title/genre/', (req, res) =>  {
   });
 });
 //get data about a director by name
-app.get('/movies/:name/directors/', (req, res) => {
+app.get('/movies/:Name/Directors/', (req, res) => {
   Movies.findOne({ 'Director.Name': req.params.Name })
   .then((director) => {
       res.status(201).json(director.Director);
@@ -91,7 +91,7 @@ app.get('/users', (req, res) => {
 });
 //Get user info based on username
 app.get('/users/:Username', (req, res) => {
-  Users.findOne({ Username: req.params.Username })
+  Users.findOne({ Username: req.params.userName })
   .then((user) => {
       res.json(user);
   })
