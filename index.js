@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 
+
 const app = express();
 const Models = require('./models.js');
 const Movies = Models.Movie;
@@ -19,6 +20,9 @@ app.use(express.static('public'));
 
 app.use(bodyParser.json());
 
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport.js');
 
 //err catch
 app.use((err, req, res, next) => {
@@ -32,7 +36,7 @@ app.get('/', (req, res) => {
 });
 
 //get list of movies
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
   .then((movies) => {
       res.status(201).json(movies);
@@ -126,7 +130,7 @@ app.put('/users/:Username',  (req, res) => {
 
 // Let users add a movie to their favorites
 app.post('/users/:Username/Movies/:MovieID', (req, res) => {
-  Users.findOneAndUpdate({ Username: req.params.Username }, 
+  Users.findOneAndUpdate({ Username: req.params.userName }, 
   { $push: { FavoriteMovies: req.params.MovieID }},
   { new: true },
   (err, updatedUser) => {
@@ -142,21 +146,21 @@ app.post('/users/:Username/Movies/:MovieID', (req, res) => {
 //post new user account
 app.post('/users', (req, res) => {
   Users.findOne({
-      Username: req.body.Username
+      userName: req.body.userName
     })
-    .then((user) => {
-      if (user) {
-        return res.status(400).send(req.body.Username + 'already exists');
+    .then(users => {
+      if (users) {
+        return res.status(400).send(req.body.userName + 'already exists');
       } else {
         Users
           .create({
-            Username: req.body.Username,
-            Password: req.body.Password,
+            userName: req.body.userName,
+            passWord: req.body.passWord,
             Email: req.body.Email,
-            Birthday: req.body.Birthday
+            birthDate: req.body.birthDate
           })
-          .then((user) => {
-            res.status(201).json(user)
+          .then((users) => {
+            res.status(201).json(users)
           })
           .catch((error) => {
             console.error(error);
@@ -200,6 +204,7 @@ app.delete('/users/:Username', (req, res) => {
       res.status(500).send('Error: ' + err);
     });
 });
+
 
 // app.get('/test-search/:data', (req, res) => {
 //   let response = movies.filter(movie => movie.title.toLowerCase().includes(req.params.data.toLowerCase()))
