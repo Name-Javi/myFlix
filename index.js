@@ -11,16 +11,12 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect('mongodb+srv://Javi:Jessilove19@cluster0.wbhpv.mongodb.net/myFlixDB?retryWrites=true&w=majority',
+
+mongoose.connect(process.env.CONNECTION_URI,
 {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
-//mongoose.connect(process.env.CONNECTION_URI,
- //{
-  //useNewUrlParser: true,
-  //useUnifiedTopology: true
-//});
 
 app.use(cors());
 
@@ -115,14 +111,12 @@ app.get('/users/:Username', (req, res) => {
   });
 });
 // Let users update their user info based on username
-app.put('/users/:Username',  (req, res) => {
-  Users.findOneAndUpdate({ Username: req.params.Username }, 
+app.put('/users/:userName',  (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.userName }, 
   { $set:
       {
-          FirstName: req.body.FirstName,
-          LastName: req.body.LastName,
-          Username: req.body.Username,
-          Password: req.body.Password,
+          userName: req.body.userName,
+          passWord: req.body.passWord,
           Email: req.body.Email,
           Birth: req.body.Birth
       }
@@ -154,22 +148,7 @@ app.post('/users/:Username/Movies/:MovieID', (req, res) => {
 });
 
 //post new user account
-app.post('/users',
-  [
-  check('userName', 'Username is required').isLength({ min: 5 }),
-  check('userName', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-  check('passWord', 'Password is required').not().isEmpty(),
-  check('Email', 'Email does not appear to be valid').isEmail()
-], (req, res) => {
-
-  let errors = validationResult(req); //checks the validation object for errors
-
-  if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
-  }
-
-  let hashedPassword = Users.hashPassword(req.body.Password);
-
+app.post('/users', (req, res) => {
   Users.findOne({
       userName: req.body.userName
     })
@@ -180,7 +159,7 @@ app.post('/users',
         Users
           .create({
             userName: req.body.userName,
-            passWord: hashedpassWord,
+            passWord: req.body.passWord,
             Email: req.body.Email,
             birthDate: req.body.birthDate
           })
