@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const cors = require('cors');
+const { check, validationResult } = require('express-validator');
 
 
 const app = express();
@@ -13,6 +15,8 @@ mongoose.connect('mongodb+srv://Javi:Jessilove19@cluster0.wbhpv.mongodb.net/myFl
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+
+app.use(cors());
 
 app.use(morgan('common'));
 
@@ -144,7 +148,22 @@ app.post('/users/:Username/Movies/:MovieID', (req, res) => {
 });
 
 //post new user account
-app.post('/users', (req, res) => {
+app.post('/users',
+  [
+  check('Username', 'Username is required').isLength({ min: 5 }),
+  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required').not().isEmpty(),
+  check('Email', 'Email does not appear to be valid').isEmail()
+], (req, res) => {
+
+  let errors = validationResult(req); //checks the validation object for errors
+
+  if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+  }
+
+  let hashedPassword = Users.hashPassword(req.body.Password);
+
   Users.findOne({
       userName: req.body.userName
     })
@@ -155,7 +174,7 @@ app.post('/users', (req, res) => {
         Users
           .create({
             userName: req.body.userName,
-            passWord: req.body.passWord,
+            passWord: hashedpassWord,
             Email: req.body.Email,
             birthDate: req.body.birthDate
           })
@@ -210,6 +229,7 @@ app.delete('/users/:Username', (req, res) => {
 //   let response = movies.filter(movie => movie.title.toLowerCase().includes(req.params.data.toLowerCase()))
 // })
 
-app.listen(8080, () => {
-  console.log('App is listening on port 8080');
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0',() => {
+ console.log('Listening on Port ' + port);
 });
