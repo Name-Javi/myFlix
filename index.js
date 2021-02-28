@@ -10,15 +10,14 @@ const app = express();
 const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
-try{
-await mongoose.connect('mongodb+srv://Javi:Jessilove19@cluster0.wbhpv.mongodb.net/myFlixDB?retryWrites=true&w=majority',
+
+setTimeout(function() {
+ mongoose.connect('mongodb://Javi:Jessilove19@cluster0-shard-00-00.wbhpv.mongodb.net:27017,cluster0-shard-00-01.wbhpv.mongodb.net:27017,cluster0-shard-00-02.wbhpv.mongodb.net:27017/myF?ssl=true&replicaSet=atlas-jp15mg-shard-0&authSource=admin&retryWrites=true&w=majority',
 {
   useNewUrlParser: true,
   useUnifiedTopology: true
-});}
-catch(error){
-  handleError(error);
-}
+});},60000);
+
 //mongoose.connect(process.env.CONNECTION_URI,
  //{
   //useNewUrlParser: true,
