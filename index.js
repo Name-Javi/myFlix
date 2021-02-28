@@ -11,11 +11,16 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect(process.env.CONNECTION_URI,
- {
+mongoose.connect('mongodb+srv://Javi:Jessilove19@cluster0.wbhpv.mongodb.net/myFlixDB?retryWrites=true&w=majority',
+{
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+//mongoose.connect(process.env.CONNECTION_URI,
+ //{
+  //useNewUrlParser: true,
+  //useUnifiedTopology: true
+//});
 
 app.use(cors());
 
@@ -151,9 +156,9 @@ app.post('/users/:Username/Movies/:MovieID', (req, res) => {
 //post new user account
 app.post('/users',
   [
-  check('Username', 'Username is required').isLength({ min: 5 }),
-  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-  check('Password', 'Password is required').not().isEmpty(),
+  check('userName', 'Username is required').isLength({ min: 5 }),
+  check('userName', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  check('passWord', 'Password is required').not().isEmpty(),
   check('Email', 'Email does not appear to be valid').isEmail()
 ], (req, res) => {
 
