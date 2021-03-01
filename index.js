@@ -5,8 +5,6 @@ const mongoose = require('mongoose');
 const Models = require('./models.js');
 const bodyParser = require('body-parser');
 
-const { check, validationResult } = require('express-validator');
-
 const Movies = Models.Movie;
 const Users = Models.User;
 
@@ -50,6 +48,8 @@ app.use(cors({
 }));
 
 let auth = require('./auth')(app);
+
+const { check, validationResult } = require('express-validator');
 
 //err catch
 app.use((err, req, res, next) => {
