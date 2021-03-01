@@ -1,22 +1,21 @@
+
 const express = require('express');
-const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const cors = require('cors');
+const Models = require('./models.js');
+const bodyParser = require('body-parser');
+
 const { check, validationResult } = require('express-validator');
 
-
-const app = express();
-const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-setTimeout(function() {
- mongoose.connect('mongodb://Javi:Jessilove19@cluster0-shard-00-00.wbhpv.mongodb.net:27017,cluster0-shard-00-01.wbhpv.mongodb.net:27017,cluster0-shard-00-02.wbhpv.mongodb.net:27017/myF?ssl=true&replicaSet=atlas-jp15mg-shard-0&authSource=admin&retryWrites=true&w=majority',
+
+ mongoose.connect('mongodb+srv://Javi:Jessilove19@cluster0.wbhpv.mongodb.net/myFlixDB?retryWrites=true&w=majority&ssl=true',
 {
   useNewUrlParser: true,
   useUnifiedTopology: true
-});},60000);
+});
 
 //mongoose.connect(process.env.CONNECTION_URI,
  //{
@@ -24,7 +23,7 @@ setTimeout(function() {
   //useUnifiedTopology: true
 //});
 
-app.use(cors());
+const app = express();
 
 app.use(morgan('common'));
 
@@ -32,9 +31,25 @@ app.use(express.static('public'));
 
 app.use(bodyParser.json());
 
-let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport.js');
+
+const cors = require('cors');
+
+let allowedOrigins = ['http://localhost:8080','https://javisolismyflix.herokuapp.com'];
+
+app.use(cors({
+	origin: (origin, callback) => {
+		if(!origin) return callback(null, true);
+		if(allowedOrigins.indexOf(origin) === -1){
+			let message = 'The CORS policy for this application does not allow access from origin ' + origin;
+			return callback(new Error(message), false);
+		}
+		return callback (null, true);
+	}
+}));
+
+let auth = require('./auth')(app);
 
 //err catch
 app.use((err, req, res, next) => {
