@@ -104,44 +104,6 @@ app.get('/users/:userName', passport.authenticate('jwt', { session: false }), (r
   });
 });
 
-// Let users update their user info based on userName
-app.put('/users/:userName',
-	[
-		check('userName', 'userName is required').isLength({min: 5}),
-		check('userName', 'userName contains non-alphanumeric characters — not allowed.').isAlphanumeric(),
-		check('passWord', 'Password is required').not().isEmpty(),
-		check('Email', 'Email does not appear to be valid.').isEmail()
-	], (req, res) => {
-			
-	// Checks validation object for errors
-	let errors = validationResult(req);
-	
-	if (!errors.isEmpty()) {
-		return res.status(422).json({ errors: errors.array() });
-	}
-	
-	let hashedPassword = Users.hashPassword(req.body.passWord);
-
-  Users.findOneAndUpdate({ userName: res.params.userName },
-  { $set:
-      {
-          userName: req.body.userName,
-          passWord:hashedPassword,
-          Email: req.body.Email,
-          birthDate: req.body.birthDate
-      }
-  },
-  { new: true }, //  Returns updated document 
-  (err, updatedUser) => {
-      if(err) {
-          console.error(err);
-          res.status(500).send('Error: ' + err);
-      } else {
-          res.json(updatedUser);
-      }
-  });
-});
-
 // Let users add a movie to their favorites
 app.post('/users/:userName/favorites/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ userName: req.params.userName }, 
@@ -202,6 +164,44 @@ app.post('/users',
       console.error(error);
       res.status(500).send('Error: ' + error);
     });
+});
+
+// Let users update their user info based on userName
+app.put('/users/:userName',
+	[
+		check('userName', 'userName is required').isLength({min: 5}),
+		check('userName', 'userName contains non-alphanumeric characters — not allowed.').isAlphanumeric(),
+		check('passWord', 'Password is required').not().isEmpty(),
+		check('Email', 'Email does not appear to be valid.').isEmail()
+	], (req, res) => {
+			
+	// Checks validation object for errors
+	let errors = validationResult(req);
+	
+	if (!errors.isEmpty()) {
+		return res.status(422).json({ errors: errors.array() });
+	}
+	
+	let hashedPassword = Users.hashPassword(req.body.passWord);
+
+  Users.findOneAndUpdate({ userName: req.params.userName },
+  { $set:
+      {
+          userName: req.body.userName,
+          passWord:hashedPassword,
+          Email: req.body.Email,
+          birthDate: req.body.birthDate
+      }
+  },
+  { new: true }, //  Returns updated document 
+  (err, updatedUser) => {
+      if(err) {
+          console.error(err);
+          res.status(500).send('Error: ' + err);
+      } else {
+          res.json(updatedUser);
+      }
+  });
 });
 
 // Let users remove movie from their favorites
