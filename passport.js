@@ -12,7 +12,7 @@ passport.use(new LocalStrategy({
   passwordField: 'passWord'
 }, (userName, passWord, callback) => {
   console.log(userName + '  ' + passWord);
-  Users.findOne({ userName: userName }, (error, user) => {
+  Users.findOne({ userName: userName }, (error, users) => {
     if (error) {
       console.log(error);
       return callback(error);
@@ -30,7 +30,7 @@ passport.use(new LocalStrategy({
 
 
     console.log('finished');
-    return callback(null, user);
+    return callback(null, users);
   });
 }));
 
@@ -39,8 +39,8 @@ passport.use(new JWTStrategy({
   secretOrKey: 'your_jwt_secret'
 }, (jwtPayload, callback) => {
   return Users.findById(jwtPayload._id)
-    .then((user) => {
-      return callback(null, user);
+    .then((users) => {
+      return callback(null, users);
     })
     .catch((error) => {
       return callback(error)
