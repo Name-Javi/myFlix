@@ -26,7 +26,7 @@ require('./passport.js');
 
 const cors = require('cors');
 
-let allowedOrigins = ['http://localhost:8080','https://javisolismyflix.herokuapp.com'];
+let allowedOrigins = ['http://localhost:1234','https://javisolismyflix.herokuapp.com'];
 
 app.use(cors({
 	origin: (origin, callback) => {
@@ -66,7 +66,7 @@ app.get('/movies',  (req, res) => {
   });
 });
 //get info about a single movie by title
-app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/movies/:Title', (req, res) => {
   Movies.findOne({
       Title: req.params.Title
     })
