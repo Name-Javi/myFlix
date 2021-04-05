@@ -19,7 +19,7 @@ app.use(morgan('common'));
 
 app.use(express.static('public'));
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 const passport = require('passport');
 require('./passport.js');
@@ -211,9 +211,10 @@ app.put('/users/:Username',
 });
 
 // Let users remove movie from their favorites
-app.delete('/users/:Username/favorites/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.use(express.json());
+app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, 
-  { $pull: { favoriteMovies: req.params.MovieID }},
+  { $pull: { FavoriteMovies: req.params.MovieID }},
   { new: true },
   (err, updatedUser) => {
       if (err) {
