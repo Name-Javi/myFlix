@@ -26,7 +26,9 @@ require('./passport.js');
 
 const cors = require('cors');
 
-let allowedOrigins = ['https://javisflix.netlify.app','http://localhost:1234','https://javisolismyflix.herokuapp.com'];
+//let allowedOrigins = ['https://javisflix.netlify.app','http://localhost:1234','https://javisolismyflix.herokuapp.com'];
+
+let allowedOrigins = [*]
 
 app.use(cors({
 	origin: (origin, callback) => {
