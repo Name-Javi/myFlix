@@ -1,35 +1,38 @@
 {
-  "name": "movie-api",
+  "name": "myFlix",
   "version": "1.0.0",
-  "description": "��#\u0000 \u0000m\u0000o\u0000v\u0000i\u0000e\u0000-\u0000a\u0000p\u0000i\u0000\r\u0000 \u0000",
+  "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rrigs/movie-api.git"
+    "url": "git+https://github.com/Name-Javi/myFlix.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rrigs/movie-api/issues"
+    "url": "https://github.com/Name-Javi/myFlix/issues"
   },
-  "homepage": "https://github.com/rrigs/movie-api#readme",
+  "homepage": "https://github.com/Name-Javi/myFlix#readme",
   "dependencies": {
-    "bcrypt": "^5.0.0",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "express-validator": "^6.8.0",
+    "express-validator": "^6.10.0",
     "jsonwebtoken": "^8.5.1",
-    "method-override": "^3.0.0",
-    "mongoose": "^5.11.6",
+    "lodash": "^4.17.20",
+    "mongoose": "^5.11.18",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0",
-    "uuid": "^8.3.2"
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.19.0"
   }
 }
