@@ -1,0 +1,25 @@
+body {
+    font: normal 16px Arial, sans-serif;
+}
+
+.doc-table {
+    border: solid 1px black;
+    border-spacing: 0;
+    font: normal 14px Arial, sans-serif;
+}
+
+.doc-table th {
+    background-color: #DDEFEF;
+    border: solid 1px black;
+    border-spacing: 0;
+    color: black;
+    padding: 10px;
+    text-align: left;
+}
+
+.doc-table td {
+    border: solid 1px black;
+    color: black;
+    border-spacing: 0;
+    padding: 10px;
+}

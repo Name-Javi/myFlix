@@ -1,0 +1,54 @@
+{
+    "_id" : ObjectId("5fce7d87066549452ff7a110"),
+    "Username" : "Rachael Rigby",
+    "Email" : "rrachaelar@gmail.com",
+    "Password" : "abcd1234!",
+    "Birthday" : ISODate("1993-08-31T00:00:00Z"),
+    "FavoriteMovies" : [
+            ObjectId("5fce79b2066549452ff7a108"),
+            ObjectId("5fce7a2e066549452ff7a109"),
+            ObjectId("5fce7b1a066549452ff7a10b"),
+            ObjectId("5fce7bc2066549452ff7a10c"),
+            ObjectId("5fce7d3e066549452ff7a10f")
+    ]
+}
+{
+    "_id" : ObjectId("5fce7dc5066549452ff7a111"),
+    "Username" : "Elise Russell",
+    "Email" : "elise@aol.com",
+    "Password" : "artist2012!",
+    "Birthday" : ISODate("1994-06-23T00:00:00Z"),
+    "FavoriteMovies" : [
+            ObjectId("5fce6c3f6f4a70ea53293d7d"),
+            ObjectId("5fce6d9e6f4a70ea53293d7e"),
+            ObjectId("5fce79b2066549452ff7a108"),
+            ObjectId("5fce7b1a066549452ff7a10b")
+    ]
+}
+{
+    "_id" : ObjectId("5fce7dfe066549452ff7a112"),
+    "Username" : "Doyce Rose",
+    "Email" : "rollsdoyce@hotmail.com",
+    "Password" : "nashTN93",
+    "Birthday" : ISODate("1993-09-06T00:00:00Z"),
+    "FavoriteMovies" : [
+            ObjectId("5fce6d9e6f4a70ea53293d7e"),
+            ObjectId("5fce7a9a066549452ff7a10a"),
+            ObjectId("5fce7bc2066549452ff7a10c"),
+            ObjectId("5fce7ca9066549452ff7a10e"),
+            ObjectId("5fce7d3e066549452ff7a10f")
+    ]
+}
+{
+    "_id" : ObjectId("5fce7e34066549452ff7a113"),
+    "Username" : "Erika Rigby",
+    "Email" : "erikarigby@gmail.com",
+    "Password" : "turtles95",
+    "Birthday" : ISODate("1995-01-21T00:00:00Z"),
+    "FavoriteMovies" : [
+            ObjectId("5fce79b2066549452ff7a108"),
+            ObjectId("5fce7a2e066549452ff7a109"),
+            ObjectId("5fce7bc2066549452ff7a10c"),
+            ObjectId("5fce7c33066549452ff7a10d")
+    ]
+}
