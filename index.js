@@ -17,7 +17,7 @@ const app = express();
 const cors = require("cors");
 app.use(cors());
 
-let allowedOrigins = ["http://localhost:4200", "http://localhost:8080", "http://localhost:1234", "https://my-flix-db-app.herokuapp.com/", "https://my-flix.netlify.app", "https://rrigs.github.io", "*"];
+let allowedOrigins = ["http://localhost:4200", "http://localhost:8080", "http://localhost:1234", "https://javisolismyflix.herokuapp.com", "https://my-flix.netlify.app", "https://rrigs.github.io", "*"];
 
 app.use(cors({
   origin: (origin, callback) => {
