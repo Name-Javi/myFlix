@@ -34,15 +34,15 @@ app.use(cors());
 //);
 
 // local connection
- mongoose.connect('mongodb+srv://Javi:Jessilove19@cluster0.wbhpv.mongodb.net/myFlixDB?retryWrites=true&w=majority&ssl=true',{useNewUrlParser: true, useUnifiedTopology: true});
+ //mongoose.connect('mongodb+srv://Javi:Jessilove19@cluster0.wbhpv.mongodb.net/myFlixDB?retryWrites=true&w=majority&ssl=true',{useNewUrlParser: true, useUnifiedTopology: true});
 
 /**
  * Online connection to MongoDB Atlas database:
  */
-//mongoose.connect(process.env.CONNECTION_URI, {
-  //useNewUrlParser: true,
- // useUnifiedTopology: true
-//});
+mongoose.connect(process.env.CONNECTION_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 app.use(morgan("common"));
 app.use(express.static("public"));
